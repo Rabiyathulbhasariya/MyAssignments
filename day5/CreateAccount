@@ -1,0 +1,57 @@
+package week2.day5;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class CreateAccount {
+
+	public static void main(String[] args) {
+		ChromeDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://leaftaps.com/opentaps");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.findElement(By.id("username")).sendKeys("demoSalesManager");
+		driver.findElement(By.id("password")).sendKeys("crmsfa");
+		driver.findElement(By.className("decorativeSubmit")).click();
+		driver.findElement(By.linkText("CRM/SFA")).click();
+		driver.findElement(By.linkText("Accounts")).click(); 	
+		driver.findElement(By.linkText("Create Account")).click(); 	
+		driver.findElement(By.xpath("(//input[@id='accountName'])")).sendKeys("Debit Limited Account");
+		driver.findElement(By.xpath("//input[@id=\"groupNameLocal\"]")).sendKeys("local name");
+		driver.findElement(By.xpath("//input[@id=\"officeSiteName\"]")).sendKeys("Site name");
+		driver.findElement(By.xpath("//input[@id=\"annualRevenue\"]")).sendKeys("1000000");
+		
+		WebElement industry = driver.findElement(By.name("industryEnumId"));
+		Select indus = new Select(industry);
+		indus.selectByVisibleText("Computer Software");
+		
+		WebElement ownership = driver.findElement(By.name("ownershipEnumId"));
+		Select owner = new Select(ownership);
+		owner.selectByVisibleText("S-Corporation");
+		
+		WebElement sources = driver.findElement(By.id("dataSourceId"));
+		Select source = new Select(sources);
+		source.selectByValue("LEAD_EMPLOYEE");
+		
+		WebElement marketingcampaign = driver.findElement(By.id("marketingCampaignId"));
+		Select mc = new Select(marketingcampaign);
+		mc.selectByIndex(5);
+				
+		driver.findElement(By.xpath("//textarea[@name=\"description\"]")).sendKeys("Selenium Automation Tester");
+		
+		WebElement state = driver.findElement(By.name("generalStateProvinceGeoId"));
+		Select sp = new Select(state);
+		sp.selectByValue("TX");
+		
+		driver.findElement(By.xpath("//input[@value=\"Create Account\"]")).click();
+		
+		
+		//input[@value="Create Account"]
+
+	}
+
+}
